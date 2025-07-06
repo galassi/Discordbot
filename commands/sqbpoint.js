@@ -85,7 +85,7 @@ module.exports = {
                 });
             });
 
-            const botCommandsChannel = message.guild.channels.cache.find(ch => ch.name === 'bot-comandi');
+            const botCommandsChannel = message.guild.channels.cache.get(process.env.BOT_COMANDI);
             if (botCommandsChannel) {
                 console.log(`[INFO] Invio dei dati nel canale comandi: ${botCommandsChannel.name}`);
                 botCommandsChannel.send({ embeds: [embed] });
