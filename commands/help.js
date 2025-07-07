@@ -15,11 +15,10 @@ module.exports = {
          +ca: carrista
          +el: elicotterista
          +rc: ricognitore
-         +rw: [messaggio] invia il messaggio a tutti 「⚔️」SKAL「⚔️」 e 「⚔️」SKAL NO SQB「⚔️」
+         +rw: [messaggio] invia il messaggio a tutti 「⚔️」IRAL「⚔️」
          +sqbpoint: lista membri nel tuo canale e i loro punti SQB
+         +mancanti: mostra i membri con meno di 1200 punti SQB
          +lupus: avvia una partita di Lupus in Fabula
-         +resetlupus: resetta la partita di Lupus in Fabula
-         +m!p + link youtube playlist
         `;
         
         // Invia il messaggio di aiuto in privato all'utente

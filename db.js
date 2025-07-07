@@ -66,8 +66,8 @@ async function checkAndInsertMembers(client) {
                     for (const msg of allMessages.reverse()) {
                         if (msg.author.bot) continue;
                         const iddiscord = msg.author.id;
-                        // Rimuove i caratteri di formattazione Markdown dal nickname
-                        const cleanNickname = msg.content.trim().replace(/[*_`~]/g, '').substring(0, 30);
+                        // Rimuove i caratteri di formattazione Markdown dal nickname, ma lascia gli underscore
+                        const cleanNickname = msg.content.trim().replace(/[*`~]/g, '').substring(0, 30);
                         const idwarthunder = cleanNickname;
                         warThunderNickMap.set(iddiscord, idwarthunder);
                     }
@@ -191,8 +191,8 @@ async function syncWarThunderNicknames(client) {
         for (const msg of allMessages.reverse()) { // reverse per tenere l'ultimo nickname scritto
             if (msg.author.bot) continue;
             const iddiscord = msg.author.id;
-            // Rimuove i caratteri di formattazione Markdown dal nickname
-            const cleanNickname = msg.content.trim().replace(/[*_`~]/g, '').substring(0, 30);
+            // Rimuove i caratteri di formattazione Markdown dal nickname, ma lascia gli underscore
+            const cleanNickname = msg.content.trim().replace(/[*`~]/g, '').substring(0, 30);
             const idwarthunder = cleanNickname;
 
             // Aggiorna solo se l'utente è già nel database

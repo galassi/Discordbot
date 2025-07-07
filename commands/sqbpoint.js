@@ -71,11 +71,19 @@ module.exports = {
                 return message.reply("Non sono stati trovati membri con un ID Discord valido nel canale vocale.");
             }
 
-            console.log("[INFO] Generazione dell'embed con i dettagli aggiornati...");
+            // Ordina i membri per punti SQB (dal più alto al più basso, null/undefined in fondo)
+            memberDetails.sort((a, b) => {
+                if (a.puntisqb == null && b.puntisqb == null) return 0;
+                if (a.puntisqb == null) return 1;
+                if (b.puntisqb == null) return -1;
+                return b.puntisqb - a.puntisqb;
+            });
+
+            console.log("[INFO] Generazione dell'embed con i dettagli aggiornati e ordinati...");
             const embed = new EmbedBuilder()
                 .setTitle('comando +sqbpoint')
                 .setColor('#00FF00')
-                .setDescription(`Membri nel tuo canale vocale "${voiceChannel.name}" e i loro punti SQB:`)
+                .setDescription(`Membri nel tuo canale vocale "${voiceChannel.name}" e i loro punti SQB (ordinati):`)
                 .setTimestamp();
 
             memberDetails.forEach((member) => {
