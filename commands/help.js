@@ -18,6 +18,8 @@ module.exports = {
          +rw: [messaggio] invia il messaggio a tutti 「⚔️」IRAL「⚔️」
          +sqbpoint: lista membri nel tuo canale e i loro punti SQB
          +mancanti: mostra i membri con meno di 1200 punti SQB
+         +reminder: invia un messaggio privato a tutti i membri con meno di 1200 punti SQB
+         +rw: [messaggio] invia un messaggio a tutti i membri con i ruoli 「⚔️」IRIX「⚔️」 e 「⚔️」IRIX2「⚔️」
          +lupus: avvia una partita di Lupus in Fabula
         `;
         

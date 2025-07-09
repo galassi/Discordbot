@@ -3,9 +3,10 @@ module.exports = {
     description: 'Invia un messaggio ai membri con specifici ruoli (raid warning)',
 
     async execute(message) {
-        // Verifica che l'utente che ha invocato il comando sia il tuo ID
-        const userIdToCheck = '195166332847652864'; // Sostituisci con il tuo ID
-        if (message.author.id !== userIdToCheck) {
+        // Permetti solo agli utenti con un certo ruolo di usare il comando
+        const requiredRoleId = '1391057660844970004';
+        const member = await message.guild.members.fetch(message.author.id);
+        if (!member.roles.cache.has(requiredRoleId)) {
             return message.reply('Non hai i permessi per utilizzare questo comando!');
         }
 
@@ -20,12 +21,12 @@ module.exports = {
             return message.reply('Il messaggio è troppo lungo. Deve essere inferiore a 2000 caratteri.');
         }
 
-        // Identifica i ruoli specifici
-        const roleSkal = message.guild.roles.cache.find(role => role.name === '「⚔️」SKAL「⚔️」');
-        const roleSkalNoSqb = message.guild.roles.cache.find(role => role.name === '「⚔️」SKAL NO SQB「⚔️」');
+        // Identifica i ruoli specifici IRIX e IRIX2
+        const roleIrix = message.guild.roles.cache.find(role => role.name === '「⚔️」IRIX「⚔️」');
+        const roleIrix2 = message.guild.roles.cache.find(role => role.name === '「⚔️」IRIX2「⚔️」');
 
-        if (!roleSkal && !roleSkalNoSqb) {
-            return message.reply('I ruoli specificati non esistono nel server.');
+        if (!roleIrix && !roleIrix2) {
+            return message.reply('I ruoli IRIX o IRIX2 non esistono nel server.');
         }
 
         try {
@@ -38,15 +39,15 @@ module.exports = {
         
             // Usa un ciclo for...of per gestire l'iterazione asincrona
             for (const member of members.values()) {
-                // Verifica se il membro ha uno dei ruoli specificati
-                const hasSkalRole = member.roles.cache.has(roleSkal?.id);
-                const hasSkalNoSqbRole = member.roles.cache.has(roleSkalNoSqb?.id);
-        
-                if (hasSkalRole || hasSkalNoSqbRole) {
+                // Verifica se il membro ha uno dei ruoli IRIX o IRIX2
+                const hasIrixRole = member.roles.cache.has(roleIrix?.id);
+                const hasIrix2Role = member.roles.cache.has(roleIrix2?.id);
+
+                if (hasIrixRole || hasIrix2Role) {
                     totalTargetMembers++;
                     try {
                         // Invia il messaggio al membro
-                        await member.send(`🚨 **AVVISO MEMBRI SKAL** 🚨\n\n${raidMessage}`);
+                        await member.send(`🚨 **AVVISO MEMBRI IRIX** 🚨\n\n${raidMessage}`);
                         successCount++;
                     } catch (err) {
                         console.error(`Errore nell'invio del messaggio a ${member.user.tag}:`, err);
@@ -59,7 +60,7 @@ module.exports = {
             let replyMessage = '';
             
             if (totalTargetMembers === 0) {
-                replyMessage = 'Non ho trovato membri con i ruoli SKAL da contattare.';
+                replyMessage = 'Non ho trovato membri con i ruoli IRIX o IRIX2 da contattare.';
             } else {
                 replyMessage = `📨 Risultato dell'invio:\n` +
                              `✅ Messaggi inviati con successo: ${successCount}/${totalTargetMembers}\n`;
