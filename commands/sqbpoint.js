@@ -52,12 +52,16 @@ module.exports = {
 
                     const result = checkQuery.recordset[0];
                     if (result) {
-                        console.log(`[SUCCESS] Dati recuperati per ${memberData.user.tag}: ${JSON.stringify(result)}`);
-                        memberDetails.push({
-                            nickname: memberData.displayName,
-                            idwarthunder: result.idwarthunder,
-                            puntisqb: result.puntisqb,
-                        });
+                        if (result.puntisqb !== null && result.puntisqb !== undefined && !isNaN(Number(result.puntisqb))) {
+                            console.log(`[SUCCESS] Dati recuperati per ${memberData.user.tag}: ${JSON.stringify(result)}`);
+                            memberDetails.push({
+                                nickname: memberData.displayName,
+                                idwarthunder: result.idwarthunder,
+                                puntisqb: result.puntisqb,
+                            });
+                        } else {
+                            console.warn(`[WARN] ${memberData.user.tag} escluso dall'embed: punti SQB null o non numerici. Dettagli: ${JSON.stringify(result)}`);
+                        }
                     } else {
                         console.warn(`[WARN] Nessun dato trovato per ${memberData.user.tag} nel database.`);
                     }
@@ -97,6 +101,7 @@ module.exports = {
             if (botCommandsChannel) {
                 console.log(`[INFO] Invio dei dati nel canale comandi: ${botCommandsChannel.name}`);
                 botCommandsChannel.send({ embeds: [embed] });
+                return; // Interrompe l'esecuzione per evitare doppio invio
             } else {
                 console.warn("[WARN] Canale bot-comandi non trovato. Invio nel canale corrente.");
                 message.channel.send({ embeds: [embed] });

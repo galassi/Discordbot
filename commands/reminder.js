@@ -31,6 +31,10 @@ module.exports = {
             let successCount = 0;
             let failedMembers = [];
             for (const memberData of result.recordset) {
+                // Salta se il punteggio è null o non numerico
+                if (memberData.puntisqb === null || memberData.puntisqb === undefined || isNaN(Number(memberData.puntisqb))) {
+                    continue;
+                }
                 try {
                     const member = await message.guild.members.fetch(memberData.iddiscord).catch(() => null);
                     if (!member) {
@@ -38,7 +42,7 @@ module.exports = {
                         continue;
                     }
                     const punti = Number(memberData.puntisqb);
-                    const dmMessage = `Ciao ${member.displayName || member.user.username},\n\nTi ricordiamo che per partecipare alle attività del clan è necessario raggiungere almeno 1200 punti SQB.\n\nIl tuo punteggio attuale: **${punti}**\n\nSe hai domande o hai bisogno di aiuto, contatta lo staff!`;
+                    const dmMessage = `Ciao ${member.displayName || member.user.username},\n\nTi ricordiamo che per partecipare alle attività della Squadriglia è necessario raggiungere almeno 1200 punti SQB.\n\nIl tuo punteggio attuale: **${punti}**\n\nSe hai domande o hai bisogno di aiuto, contatta lo staff!`;
                     await member.send(dmMessage);
                     successCount++;
                 } catch (err) {
@@ -56,8 +60,8 @@ module.exports = {
             }
             await message.reply(replyMessage);
         } catch (error) {
-            console.error(`[ERROR] Errore durante l'esecuzione del comando +reminder: ${error.message}`);
-            message.reply('Si è verificato un errore durante l\'esecuzione del comando.');
+            console.error(`[ERROR] Errore durante il debug del comando +reminder: ${error.message}`);
+            message.reply('Si è verificato un errore durante il debug del comando.');
         }
     },
 };
