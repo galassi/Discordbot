@@ -88,7 +88,7 @@ async function checkAndInsertMembers(client) {
         const currentIrixMembers = new Set();
         for (const [memberID, member] of members) {
             if (member.roles.cache.some(role => 
-                role.name === '「⚔️」IRIX「⚔️」'
+                role.name === '「🟦」IRIX「🟦」'
             )) {
                 currentIrixMembers.add(memberID);
             }
@@ -120,7 +120,7 @@ async function checkAndInsertMembers(client) {
         let membriAggiunti = 0;
         for (const [memberID, member] of members) {
             if (member.roles.cache.some(role => 
-                role.name === '「⚔️」IRIX「⚔️」'
+                role.name === '「🟦」IRIX「🟦」'
             )) {
                 const checkDuplicateQuery = await pool.request()
                     .input('iddiscord', sql.VarChar(19), memberID)

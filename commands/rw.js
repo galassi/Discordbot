@@ -22,8 +22,8 @@ module.exports = {
         }
 
         // Identifica i ruoli specifici IRIX e IRIX2
-        const roleIrix = message.guild.roles.cache.find(role => role.name === '「⚔️」IRIX「⚔️」');
-        const roleIrix2 = message.guild.roles.cache.find(role => role.name === '「⚔️」IRIX2「⚔️」');
+        const roleIrix = message.guild.roles.cache.find(role => role.name === '「🟦」IRIX「🟦」');
+        const roleIrix2 = message.guild.roles.cache.find(role => role.name === '「🟪」IRIX 2「🟪」');
 
         if (!roleIrix && !roleIrix2) {
             return message.reply('I ruoli IRIX o IRIX2 non esistono nel server.');
